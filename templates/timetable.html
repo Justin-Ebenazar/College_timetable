@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 1px solid black;
+            margin: 10px;
+            border-collapse:collapse ;
+        }
+        td,th{
+            font-size: 22px;
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    {% for class in classtt %}
+        <table>
+            <th colspan="8">{{class}}</th>
+            {% for data in classtt[class] %}
+                <tr>
+                    {% for per in data %}
+                        <td>{{per}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>

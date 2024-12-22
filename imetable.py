@@ -52,11 +52,15 @@ def create_database():
     ''')
     conn.commit()
     conn.close()
+f = 1
 def options():
+    global f
     opts = ["addteacher", "assignsub", "dropteacher", "viewteacher", "viewteachsub", "createclass", "dropclass", "viewclasses", "generatetimetable", "truncatetimetable"]
     while True:
-        for i, opt in enumerate(opts):
-            print(i+1, opt)
+        if f:
+            for i, opt in enumerate(opts):
+                print(i+1, opt)
+                f = 0
         choice = int(input("Enter your choice: "))
         if choice == 1:
             addteacher()
@@ -78,6 +82,8 @@ def options():
             generatetimetable()
         elif choice == 10:
             truncatetimetable()
+        elif choice == 11:
+            showtt()
         else:
             print("Invalid option.")
 
@@ -228,6 +234,10 @@ def generatetimetable():
     cursor.execute("SELECT c.id, c.name, s.name, ts.subject_id, ts.teacher_id FROM classes c JOIN teacher_subject ts ON c.id = ts.class_id JOIN subjects s ON ts.subject_id = s.id")
     class_subjects = cursor.fetchall()
 
+    # print(class_subjects)
+    # for i in class_subjects:
+    #     print(i)
+
     timetables = {}
     for class_id, class_name, subject_name, subject_id, teacher_id in class_subjects:
         if class_name not in timetables:
@@ -240,7 +250,7 @@ def generatetimetable():
             if timetables[class_name][day][period] is None:
                 cursor.execute("SELECT * FROM timetables WHERE teacher_id = ? AND day = ? AND period = ?", (teacher_id, day, period))
                 if not cursor.fetchone():
-                    timetables[class_name][day][period] = (subject_name, teacher_name)
+                    timetables[class_name][day][period] = (subject_name, "teacher_id")
                     cursor.execute("INSERT INTO timetables (class_id, day, period, subject_id, teacher_id) VALUES (?, ?, ?, ?, ?)", (class_id, day, period, subject_id, teacher_id))
                     conn.commit()
                     assigned = True
@@ -252,11 +262,14 @@ def generatetimetable():
             for period in range(8):
                 if timetable[day][period]:
                     subject, teacher = timetable[day][period]
-                    print(f"Period {period+1}: {subject} ({teacher})")
+                    # print(f"Period {period+1}: {subject} ({teacher})")
                 else:
-                    print(f"Period {period+1}: Free")
-
+                    pass
+                    # print(f"Period {period+1}: Free")
     conn.close()
+def showtt():
+    cursor.execute("select * from timetables")
+    print(cursor.fetchall())
 
 def truncatetimetable():
     class_name = input("Enter class name to truncate timetable: ")
