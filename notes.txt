@@ -1,0 +1,1 @@
+staff = {"edwin":{'cd':8,'toc':8,'cdlab':3},"akila":{'fds':8,'rmt':8,'fdslab':3},"simi":{'dbms':8,'dbmclab':3},"santi":{'fds':8,'cn':8,'fdslab':3},"anita":{'dc':8,'pic':8,'devops':8},"kavita":{'sta':8,'cs':8,'pic':8},"thangam":{'pic':8,'dbms':8,'dbmslab':3},"bhuvana":{'pic':8,'fds':8,'fdslab':3},"moni":{'oops':8,'ccs':8,'dm':8},"arul":{'dbms':8,'oops':8,'dbmslab':3}}

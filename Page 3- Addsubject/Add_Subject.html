@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Add Subject</title>
+    <link rel="stylesheet" href="addsubject.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Subject</h2>
+        <form id="addsubject">
+            <div class="form-group">
+                <label for="teacher">Select Teacher</label>
+                <div class="dropdown-container">
+                    <input type="text" id="teacherSearch" class="dropdown-input" placeholder="Search Teacher" onkeyup="filterTeachers()">
+                    <div id="teacherDropdown" class="dropdown-list">
+                        <div data-value="teacher1">Edwin</div>
+                        <div data-value="teacher2">Eldin</div>
+                        <div data-value="teacher3">Kaviya</div>
+                    </div>
+                </div>
+            </div>
+        <label for="Subject_code">Subject Code</label>
+            <input type="text" id="Subjectcode" placeholder="Enter Subject Code" required>
+         <label for="Subject_name">Subject Name</label>
+            <input type="text" id="SubjectName" placeholder="Enter Subject Name" required>
+            <div class="btn">
+                <button type="button" id="Addanother">Add Another</button>
+                <button type="submit">Submit</button>
+                <button type="button" id="Cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <script>
+    function filterTeachers(){
+        const input=document.getElementById('teacherSearch');
+        const filter=input.value.toLowerCase();
+        const dropdown=document.getElementById('teacherDropdown');
+        const options=dropdown.getElementsByTagName('div');
+    
+        let visible=false;
+        for(let i=0;i<options.length;i++){
+            const option=options[i];
+            const text=option.textContent||option.innerText;
+            if(text.toLowerCase().indexOf(filter)>-1){
+                option.style.display='block';
+                visible=true;
+            }else{
+                option.style.display='none';
+            }
+        }
+        dropdown.style.display=visible?'block':'none';
+    }
+    document.getElementById('teacherDropdown').addEventListener('click', function(e) {
+        if(e.target&&e.target.nodeName==='DIV'){
+            document.getElementById('teacherSearch').value=e.target.textContent;
+            document.getElementById('teacherDropdown').style.display='none';
+        }
+    });
+    window.addEventListener('click',function(e){
+        if(!e.target.closest('.dropdown-container')){
+            document.getElementById('teacherDropdown').style.display='none';
+        }
+    });
+    </script>
+    </body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+    

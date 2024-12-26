@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width,initial-scale=1.0">
+    <title>Add Class</title>
+    <link href="addclass.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="overlay"></div>
+            <div class="modal">
+                <button class="close-btn" onlclick="closeModal()">&#215;</button>
+                <h2>Add Class</h2>
+                <form>
+                    <label for="class-name">Class Name</label>
+                    <input type="text" id="class-name" placeholder="Enter Class Name">
+                    <br>
+                    <br>
+                    <button type="submit" class="add-btn">+ADD</button>
+                </form>
+        </div>
+        <script>
+            function closeModal(){
+                document.querySelector('.model').style.display='none';
+                document.querySelector('.overlay').style.display='none';
+            }
+            </script>
+    </body>
+</html>
