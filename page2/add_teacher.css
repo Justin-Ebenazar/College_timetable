@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('bg.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    background: rgba(16, 102, 168, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+.form-group {
+    margin-bottom: 30px; 
+    text-align: left;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 8px; 
+    font-size: 0.9em; 
+    border: none;
+    border-radius: 5px;
+    background: #f0f0f0;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+button {
+    flex: 1;
+    padding: 8px; 
+    font-size: 0.9em; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+button.add {
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
+    color: #fff;
+}
+button.submit {
+    background: linear-gradient(to right, #28a745, #218838);
+    color: #fff;
+}
+button.cancel {
+    background: linear-gradient(to right, #dc3545, #c82333);
+    color: #fff;
+}
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+button:active {
+    transform: scale(0.95);
+}

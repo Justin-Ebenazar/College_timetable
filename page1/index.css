@@ -1,0 +1,68 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('TECH.png');
+    background-size: cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff; 
+}
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    background: rgba(206, 199, 199, 0.6); 
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(20, 91, 191, 0.5);
+}
+h1 {
+    margin-bottom: 120px;
+    font-size: 2.5em;
+    color: #060404;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 120px;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    width: 50%;
+}
+button {
+    width: 100%;
+    padding: 20px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+button:hover {
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+button:active {
+    transform: scale(0.95);
+    background: #5b86e5;
+}
+button i {
+    font-size: 1.5em;
+    color: #fff;
+}
