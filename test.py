@@ -1,0 +1,4 @@
+l =[['OOPS', 'simi', '7'], ['FDS', 'anita', '8'], ['DS', 'akila', 7], ['DPCO', 'tangam', '7'], ['M3', 'moni', '8'], ['OOPSlab', 'simi', '3'], ['fdslab', 'anita', '3'], ['sprt', 'bhuvana', '1'], ['lib', 'arul', '1']]
+print(l.index(['OOPSlab', 'simi', '3']))
+j = [['OOPS', None, 'OOPSlab', 'OOPSlab', 'OOPSlab', 'lib', None, 'DS'], ['DS', 'M3', None, None, None, 'M3', None, None], ['M3', 'OOPS', None, 'DS', 'DS', None, None, 'FDS'], ['FDS', None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
+print(sum(sublist.count(None) for sublist in j))

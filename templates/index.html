@@ -124,6 +124,11 @@
     </style>
 </head>
 <body>
+    <datalist id="sn_sugg">
+        {% for i in sn %}
+            <option>{{i}}</option>
+        {% endfor %}
+    </datalist>
     <header>
         <h1>Manikaraj</h1>
     </header>
@@ -139,7 +144,7 @@
                         </tr>
                         <tr>
                             <td><input type="text" placeholder="subject name" name="SUBJECTNAME[]"></td>
-                            <td><input type="text" placeholder="subject staff" name="SUBJECTSTAFF[]"></td>
+                            <td><input type="text" placeholder="subject staff" name="SUBJECTSTAFF[]" list="sn_sugg"></td>
                             <td><input type="text" placeholder="subject period" name="SUBJECTPERIOD[]"></td>
                         </tr>
                     </table>
@@ -159,7 +164,7 @@
 
             newRow.innerHTML = `
                 <td><input type="text" placeholder="subject name" name="SUBJECTNAME[]"></td>
-                <td><input type="text" placeholder="subject staff" name="SUBJECTSTAFF[]"></td>
+                <td><input type="text" placeholder="subject staff" name="SUBJECTSTAFF[]" list="sn_sugg"></td>
                 <td><input type="text" placeholder="subject period" name="SUBJECTPERIOD[]"></td>
             `;
 
@@ -181,7 +186,7 @@
                         </tr>
                         <tr>
                             <td><input type="text" placeholder="subject name" name="SUBJECTNAME[]"></td>
-                            <td><input type="text" placeholder="subject staff" name="SUBJECTSTAFF[]"></td>
+                            <td><input type="text" placeholder="subject staff" name="SUBJECTSTAFF[]"  list="sn_sugg"></td>
                             <td><input type="text" placeholder="subject period" name="SUBJECTPERIOD[]"></td>
                         </tr>
                     </table>

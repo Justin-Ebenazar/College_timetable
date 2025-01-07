@@ -26,11 +26,23 @@
             {% for data in classtt[class] %}
                 <tr>
                     {% for per in data %}
-                        <td>{{per}}</td>
+                        <td>{{(per if per != None else '    ')}}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
         </table>
     {% endfor %}
+    <!-- {% for staff in stafftt %}
+        <table>
+            <th colspan="8">{{class}}</th>
+            {% for sdata in stafftt[staff] %}
+                <tr>
+                    {% for sper in sdata %}
+                        <td>{{(sper if sper != None else '    ')}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %} -->
 </body>
 </html>
