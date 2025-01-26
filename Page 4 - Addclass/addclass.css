@@ -48,15 +48,25 @@ body{
     width: 72%;
     padding: 8px;
     border: 1px solid #363131bd;
+    transition: all 0.4s ease;
+    border:2px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
     margin-left: 35px;
     margin-top: 15px;
     margin-bottom: 5px;
 }
+.modal input:focus{
+border-color: #518bc5;
+  box-shadow: 0 0 8px rgba(58, 157, 255, 0.3);
+  background-color: #ffffff;
+}
 .modal input:hover {
     background-color: #f5f5f5;
     border-color: #b0b0c4; 
+}
+.modal input:active{
+transform: scale(1.02);
 }
 .add-btn{
     width: 35%;
@@ -70,9 +80,17 @@ body{
     font-weight:bold;
     cursor: pointer;
     border-radius: 18px;
+    transition: transform 0.3s, box-shadow 0.5s;
 }
 .add-btn:hover{
-    background: rgba(109, 219, 109, 0.705);
+    opacity:0.9;
+    background: linear-gradient(to right, #63f06f, #36d33e);
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+.add-btn:active{
+transform: scale(0.95);
+        background: #8ee55b;
 }
 .close-btn{
     position: absolute;
