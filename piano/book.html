@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details | Harmony Piano School</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #5D4037; /* Dark brown */
+            --secondary-color: #000000; /* Black */
+            --accent-color: #FFFFFF; /* White */
+            --text-color: #333333;
+            --light-bg: #f5f5f5;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #3E2723;
+            transform: translateY(-2px);
+        }
+        
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        
+        /* Course Details Layout */
+        .course-details-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .course-image-section {
+            height: 40vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .course-content-section {
+            background-color: var(--accent-color);
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: -10vh;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            padding: 30px 0;
+        }
+        
+        .course-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        .course-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .course-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .course-tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .course-tab-content {
+            display: none;
+        }
+        
+        .course-tab-content.active {
+            display: block;
+        }
+        
+        .course-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+        }
+        
+        /* Enroll Form */
+        .enroll-form {
+            display: none;
+            background-color: var(--light-bg);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .enroll-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .enroll-form .btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Responsive Layout for Laptop */
+        @media screen and (min-width: 992px) {
+            .course-details-container {
+                flex-direction: row;
+                /* min-height: calc(100vh - 80px); */
+            }
+            
+            .course-image-section {
+                height: auto;
+                width: 50%;
+            }
+            
+            .course-content-section {
+                width: 50%;
+                margin-top: 0;
+                border-radius: 0;
+                padding: 50px;
+                overflow-y: auto;
+            }
+            
+            .back-btn {
+                top: 10px;
+                left: 30px;
+            }
+        }
+        
+        /* Tablet View */
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .course-image-section {
+                height: 50vh;
+            }
+            
+            .course-content-section {
+                margin-top: -15vh;
+            }
+            
+            .course-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Mobile View */
+        @media screen and (max-width: 767px) {
+            .course-image-section {
+                height: 30vh;
+            }
+            
+            .course-content-section {
+                margin-top: -5vh;
+            }
+            
+            .course-title {
+                font-size: 1.5rem;
+            }
+            
+            .course-tab {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="javascript:window.history.back()" class="back-btn" aria-label="Go back">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+    </a>
+
+    <!-- Course Details Container -->
+    <div class="course-details-container">
+        <!-- Course Image Section -->
+        <div class="course-image-section">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Piano Course">
+        </div>
+        
+        <!-- Course Content Section -->
+        <div class="course-content-section">
+            <div class="container">
+                <h1 class="course-title">Beginner Piano Course</h1>
+                
+                <!-- Course Tabs -->
+                <div class="course-tabs">
+                    <div class="course-tab active" data-tab="overview">Course Overview</div>
+                    <div class="course-tab" data-tab="syllabus">Styles & Syllabus</div>
+                    <div class="course-tab" data-tab="options">Course Options</div>
+                    <div class="course-tab" data-tab="fees">Fee Details</div>
+                </div>
+                
+                <!-- Tab Contents -->
+                <div class="course-tab-content active" id="overview">
+                    <h2>About This Course</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
+                    <p>Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor.</p>
+                </div>
+                
+                <div class="course-tab-content" id="syllabus">
+                    <h2>Course Syllabus</h2>
+                    <h3>Month 1: Fundamentals</h3>
+                    <ul>
+                        <li>Introduction to piano keyboard</li>
+                        <li>Proper hand positioning</li>
+                        <li>Basic music notation</li>
+                        <li>Simple melodies with right hand</li>
+                    </ul>
+                    
+                    <h3>Month 2: Building Skills</h3>
+                    <ul>
+                        <li>Left hand coordination</li>
+                        <li>Basic chords</li>
+                        <li>Rhythm patterns</li>
+                        <li>Simple songs with both hands</li>
+                    </ul>
+                    
+                    <h3>Month 3: Putting It All Together</h3>
+                    <ul>
+                        <li>More complex chords</li>
+                        <li>Introduction to scales</li>
+                        <li>Playing with expression</li>
+                        <li>Performance preparation</li>
+                    </ul>
+                </div>
+                
+                <div class="course-tab-content" id="options">
+                    <h2>Course Options</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>
+                    <p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet.</p>
+                </div>
+                
+                <div class="course-tab-content" id="fees">
+                    <h2>Fee Structure</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Duration</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Basic</td>
+                                <td>4 weeks</td>
+                                <td>$120</td>
+                            </tr>
+                            <tr>
+                                <td>Standard</td>
+                                <td>12 weeks</td>
+                                <td>$300 ($100/month)</td>
+                            </tr>
+                            <tr>
+                                <td>Premium</td>
+                                <td>24 weeks</td>
+                                <td>$540 ($90/month)</td>
+                            </tr>
+                            <tr>
+                                <td>Private Lessons</td>
+                                <td>Per session</td>
+                                <td>$50/hour</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Enroll Button -->
+                <button class="btn enroll-btn" style="margin-top: 30px;">Enroll Now</button>
+                
+                <!-- Enroll Form (Hidden by default) -->
+                <div class="enroll-form">
+                    <h2>Enrollment Form</h2>
+                    <form id="enrollmentForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="course">Select Course Plan</label>
+                            <select id="course" required>
+                                <option value="">-- Select Plan --</option>
+                                <option value="basic">Basic (4 weeks) - $120</option>
+                                <option value="standard">Standard (12 weeks) - $300</option>
+                                <option value="premium">Premium (24 weeks) - $540</option>
+                                <option value="private">Private Lessons - $50/hour</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Additional Notes (Optional)</label>
+                            <textarea id="message" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Submit Enrollment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // Tab Switching
+        const tabs = document.querySelectorAll('.course-tab');
+        const tabContents = document.querySelectorAll('.course-tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Enroll Form Toggle
+        const enrollBtn = document.querySelector('.enroll-btn');
+        const enrollForm = document.querySelector('.enroll-form');
+        
+        enrollBtn.addEventListener('click', () => {
+            enrollForm.classList.toggle('active');
+            
+            // Scroll to form if it's being shown
+            if (enrollForm.classList.contains('active')) {
+                enrollForm.scrollIntoView({ behavior: 'smooth' });
+                enrollBtn.textContent = 'Close Form';
+            } else {
+                enrollBtn.textContent = 'Enroll Now';
+            }
+        });
+        
+        // Form Submission
+        const enrollmentForm = document.getElementById('enrollmentForm');
+        enrollmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your enrollment! We will contact you shortly.');
+            enrollmentForm.reset();
+            enrollForm.classList.remove('active');
+            enrollBtn.textContent = 'Enroll Now';
+        });
+        
+        // Responsive adjustments
+        function handleResize() {
+            if (window.innerWidth >= 992) {
+                // Laptop view - ensure form is closed by default
+                enrollForm.classList.remove('active');
+                enrollBtn.textContent = 'Enroll Now';
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Run on initial load
+    </script>
+</body>
+</html>
